@@ -474,106 +474,402 @@ Observed Evidence
 AI-SOC/
 │
 ├── README.md
+├── LICENSE
 ├── requirements.txt
+├── package.json
 ├── docker-compose.yml
+├── Dockerfile
 ├── .env.example
+├── .gitignore
 │
 ├── apps/
+│   │
 │   ├── personal/
 │   │   ├── Dockerfile
 │   │   ├── config.py
-│   │   └── app.py
+│   │   ├── app.py
+│   │   ├── routes/
+│   │   │   ├── dashboard.py
+│   │   │   ├── scanner.py
+│   │   │   ├── alerts.py
+│   │   │   └── notifications.py
+│   │   └── services/
+│   │       ├── personal_risk.py
+│   │       ├── personal_alerts.py
+│   │       └── personal_security.py
+│   │
 │   └── enterprise/
 │       ├── Dockerfile
 │       ├── config.py
-│       └── app.py
+│       ├── app.py
+│       ├── routes/
+│       │   ├── dashboard.py
+│       │   ├── organizations.py
+│       │   ├── devices.py
+│       │   ├── alerts.py
+│       │   └── incidents.py
+│       └── services/
+│           ├── organization_service.py
+│           ├── enterprise_alerts.py
+│           └── enterprise_security.py
 │
 ├── backend/
+│   │
 │   ├── api/
+│   │   ├── __init__.py
 │   │   ├── auth.py
 │   │   ├── users.py
 │   │   ├── organizations.py
+│   │   ├── devices.py
 │   │   ├── alerts.py
 │   │   ├── incidents.py
 │   │   ├── investigation.py
 │   │   ├── scanners.py
+│   │   ├── notifications.py
 │   │   └── reports.py
 │   │
 │   ├── auth/
+│   │   ├── __init__.py
 │   │   ├── authentication.py
 │   │   ├── authorization.py
-│   │   └── rbac.py
+│   │   ├── rbac.py
+│   │   ├── permissions.py
+│   │   └── tokens.py
 │   │
 │   ├── database/
+│   │   ├── __init__.py
 │   │   ├── database.py
 │   │   ├── models.py
+│   │   ├── schemas.py
 │   │   └── repositories/
+│   │       ├── __init__.py
+│   │       ├── user_repo.py
+│   │       ├── organization_repo.py
+│   │       ├── device_repo.py
+│   │       ├── alert_repo.py
+│   │       ├── incident_repo.py
+│   │       └── notification_repo.py
 │   │
 │   └── services/
+│       ├── __init__.py
+│       ├── user_service.py
+│       ├── organization_service.py
 │       ├── alert_service.py
 │       ├── incident_service.py
 │       ├── scanner_service.py
+│       ├── notification_service.py
 │       └── report_service.py
 │
 ├── ai/
+│   │
+│   ├── __init__.py
+│   │
 │   ├── url_detection/
+│   │   ├── __init__.py
+│   │   ├── classifier.py
+│   │   ├── features.py
+│   │   ├── preprocessing.py
+│   │   └── predictor.py
+│   │
 │   ├── phishing_detection/
+│   │   ├── __init__.py
+│   │   ├── email_parser.py
+│   │   ├── text_preprocessing.py
+│   │   ├── classifier.py
+│   │   └── predictor.py
+│   │
 │   ├── malware_detection/
+│   │   ├── __init__.py
+│   │   ├── file_analyzer.py
+│   │   ├── hash_analyzer.py
+│   │   └── yara_rules.py
+│   │
 │   ├── log_anomaly/
+│   │   ├── __init__.py
+│   │   ├── preprocessing.py
+│   │   ├── isolation_forest.py
+│   │   ├── autoencoder.py
+│   │   └── predictor.py
+│   │
 │   ├── alert_classification/
+│   │   ├── __init__.py
+│   │   ├── triage_model.py
+│   │   ├── severity.py
+│   │   └── classifier.py
+│   │
 │   ├── alert_correlation/
+│   │   ├── __init__.py
+│   │   ├── graph_clustering.py
+│   │   ├── similarity.py
+│   │   └── correlation_engine.py
+│   │
 │   ├── risk_engine/
+│   │   ├── __init__.py
+│   │   ├── scoring.py
+│   │   ├── risk_rules.py
+│   │   └── confidence.py
+│   │
 │   └── models/
+│       ├── url_model.pkl
+│       ├── phishing_model.pkl
+│       ├── anomaly_model.pkl
+│       └── model_config.json
 │
 ├── investigation/
+│   │
+│   ├── __init__.py
 │   ├── evidence/
+│   │   ├── __init__.py
+│   │   ├── collector.py
+│   │   ├── parser.py
+│   │   └── evidence_store.py
+│   │
 │   ├── correlation/
+│   │   ├── __init__.py
+│   │   ├── engine.py
+│   │   └── relationships.py
+│   │
 │   ├── timeline/
+│   │   ├── __init__.py
+│   │   ├── builder.py
+│   │   └── event_ordering.py
+│   │
 │   ├── investigator.py
+│   ├── evidence_analyzer.py
 │   └── report_generator.py
 │
 ├── rag/
+│   │
+│   ├── __init__.py
 │   ├── documents/
+│   │   ├── security_playbooks/
+│   │   ├── mitre_docs/
+│   │   └── procedures/
+│   │
 │   ├── ingestion/
+│   │   ├── parser.py
+│   │   ├── loader.py
+│   │   └── chunker.py
+│   │
 │   ├── embeddings/
+│   │   ├── generator.py
+│   │   └── model.py
+│   │
 │   ├── vector_store/
+│   │   ├── chroma_client.py
+│   │   └── collections.py
+│   │
 │   ├── retrieval/
+│   │   ├── search_engine.py
+│   │   ├── reranker.py
+│   │   └── context_builder.py
+│   │
 │   └── prompts/
+│       ├── system_prompts.json
+│       ├── investigation_prompts.txt
+│       └── triage_templates.txt
 │
 ├── threat_intelligence/
+│   │
+│   ├── __init__.py
 │   ├── ioc/
+│   │   ├── ip_analyzer.py
+│   │   ├── domain_analyzer.py
+│   │   ├── hash_analyzer.py
+│   │   └── ioc_extractor.py
+│   │
 │   ├── mitre/
+│   │   ├── attck_mapping.json
+│   │   ├── technique_mapper.py
+│   │   └── tactic_mapper.py
+│   │
 │   ├── enrichment/
+│   │   ├── virus_total.py
+│   │   ├── whois_lookup.py
+│   │   └── dns_lookup.py
+│   │
 │   └── feeds/
+│       ├── alienvault_otx.py
+│       ├── feed_manager.py
+│       └── feed_parser.py
 │
 ├── ingestion/
+│   │
+│   ├── __init__.py
+│   │
 │   ├── syslog/
+│   │   ├── receiver.py
+│   │   └── parser.py
+│   │
 │   ├── windows/
+│   │   ├── event_forwarder.py
+│   │   └── event_parser.py
+│   │
 │   ├── linux/
+│   │   ├── auditd_parser.py
+│   │   └── auth_log_parser.py
+│   │
 │   ├── firewall/
+│   │   ├── traffic_logger.py
+│   │   └── firewall_parser.py
+│   │
 │   ├── web_server/
+│   │   ├── nginx_ingress.py
+│   │   └── apache_parser.py
+│   │
 │   ├── cloud/
+│   │   ├── aws_cloudtrail.py
+│   │   └── cloud_parser.py
+│   │
 │   └── application/
+│       ├── event_bus.py
+│       └── event_parser.py
 │
 ├── frontend/
+│   │
 │   ├── package.json
+│   ├── vite.config.ts
+│   ├── index.html
+│   │
 │   └── src/
+│       ├── main.tsx
+│       ├── App.tsx
+│       │
 │       ├── pages/
+│       │   ├── auth/
+│       │   │   ├── Login.tsx
+│       │   │   ├── Register.tsx
+│       │   │   └── ForgotPassword.tsx
+│       │   │
+│       │   ├── personal/
+│       │   │   ├── PersonalDashboard.tsx
+│       │   │   ├── URLScanner.tsx
+│       │   │   ├── FileScanner.tsx
+│       │   │   ├── SecurityAlerts.tsx
+│       │   │   └── SecurityHistory.tsx
+│       │   │
+│       │   └── enterprise/
+│       │       ├── EnterpriseDashboard.tsx
+│       │       ├── OrganizationSettings.tsx
+│       │       ├── Users.tsx
+│       │       ├── Devices.tsx
+│       │       ├── Alerts.tsx
+│       │       ├── Incidents.tsx
+│       │       └── Investigation.tsx
+│       │
 │       ├── components/
+│       │   ├── UI/
+│       │   │   ├── Button.tsx
+│       │   │   ├── Card.tsx
+│       │   │   ├── Modal.tsx
+│       │   │   ├── Badge.tsx
+│       │   │   └── Alert.tsx
+│       │   │
+│       │   ├── charts/
+│       │   │   ├── RiskChart.tsx
+│       │   │   ├── AlertChart.tsx
+│       │   │   └── AttackGraph.tsx
+│       │   │
+│       │   ├── alerts/
+│       │   │   ├── AlertCard.tsx
+│       │   │   ├── AlertDetails.tsx
+│       │   │   └── NotificationPopup.tsx
+│       │   │
+│       │   └── common/
+│       │       ├── Navbar.tsx
+│       │       ├── Sidebar.tsx
+│       │       └── Loading.tsx
+│       │
 │       ├── dashboards/
+│       │   ├── MainDashboard.tsx
+│       │   ├── IncidentView.tsx
+│       │   └── SOCOverview.tsx
+│       │
 │       ├── services/
+│       │   ├── api.ts
+│       │   ├── auth.ts
+│       │   ├── websocket.ts
+│       │   └── notifications.ts
+│       │
 │       └── auth/
+│           ├── AuthContext.tsx
+│           └── ProtectedRoute.tsx
 │
 ├── data/
 │   ├── raw/
+│   │   ├── security_logs.csv
+│   │   ├── urls.csv
+│   │   └── phishing_emails.csv
+│   │
 │   ├── processed/
+│   │   ├── processed_logs.csv
+│   │   └── url_features.csv
+│   │
 │   ├── sample/
+│   │   ├── brute_force.json
+│   │   ├── phishing.json
+│   │   └── suspicious_login.json
+│   │
 │   └── threat_intelligence/
+│       └── local_ti_cache.db
 │
 ├── tests/
+│   ├── conftest.py
+│   ├── test_backend/
+│   │   ├── test_auth.py
+│   │   ├── test_users.py
+│   │   ├── test_alerts.py
+│   │   └── test_incidents.py
+│   │
+│   ├── test_ai/
+│   │   ├── test_url_detection.py
+│   │   ├── test_phishing.py
+│   │   ├── test_anomaly.py
+│   │   └── test_risk_engine.py
+│   │
+│   └── test_rag/
+│       ├── test_embeddings.py
+│       └── test_retrieval.py
+│
 ├── scripts/
+│   ├── seed_database.py
+│   ├── generate_sample_logs.py
+│   ├── train_models.py
+│   ├── load_threat_intel.py
+│   └── deploy_stack.sh
+│
 ├── notebooks/
+│   ├── 01_dataset_analysis.ipynb
+│   ├── 02_url_detection.ipynb
+│   ├── 03_log_anomaly_training.ipynb
+│   ├── 04_alert_classification.ipynb
+│   └── 05_rag_evaluation.ipynb
+│
 └── docs/
+    │
+    ├── architecture/
+    │   ├── system_architecture.png
+    │   ├── data_flow.png
+    │   ├── personal_architecture.png
+    │   └── enterprise_architecture.png
+    │
+    ├── api/
+    │   └── openapi.json
+    │
+    ├── security/
+    │   ├── threat_modeling.md
+    │   ├── security_policy.md
+    │   └── rbac_design.md
+    │
+    ├── research/
+    │   ├── literature_review.md
+    │   ├── methodology.md
+    │   ├── experiments.md
+    │   └── results.md
+    │
+    └── deployment/
+        ├── deployment.md
+        └── k8s-manifests.yaml
 ```
 
 ---
